@@ -1,0 +1,53 @@
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Seleccionar el formulario por su ID o etiqueta
+    const formulario = document.getElementById('form-contacto') || document.querySelector('form');
+    
+    if (formulario) {
+        formulario.addEventListener('submit', function(e) {
+            // Evita que la página intente recargarse o enviar un POST al servidor
+            e.preventDefault();
+            
+            // Obtener valores
+            const nombre = document.getElementById('nombre').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            const asunto = document.getElementById('asunto').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            
+            // Validacion
+            if (nombre === '' || correo === '' || asunto === '' || mensaje === '') {
+                alert('Por favor, llene todos los campos del formulario.');
+                return;
+            }
+            
+            // Mensaje de exito sin cambiar de pagina
+            alert('¡Gracias ' + nombre + '! Tu mensaje ha sido recibido.');
+            formulario.reset();
+        });
+    }
+
+    // Estilo activo en los enlaces al hacer scroll
+    const secciones = document.querySelectorAll('main section');
+    const enlacesMenu = document.querySelectorAll('.barra-nav .menu a');
+
+    window.addEventListener('scroll', function() {
+        let seccionActual = '';
+
+        secciones.forEach(function(seccion) {
+            const seccionTop = seccion.offsetTop - 120;
+            const seccionAltura = seccion.offsetHeight;
+
+            if (window.scrollY >= seccionTop && window.scrollY < seccionTop + seccionAltura) {
+                seccionActual = seccion.getAttribute('id');
+            }
+        });
+
+        enlacesMenu.forEach(function(enlace) {
+            enlace.style.color = '';
+            if (enlace.getAttribute('href') === '#' + seccionActual) {
+                enlace.style.color = '#0077b6';
+            }
+        });
+    });
+
+});
