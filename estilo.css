@@ -146,6 +146,22 @@ h2 {
     }
 }
 
+/* Botón de menú hamburguesa (oculto en pantallas grandes) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--color-acento);
+    padding: 0.2rem 0.5rem;
+
+    &:focus {
+        outline: 2px solid var(--color-secundario);
+        outline-offset: 2px;
+    }
+}
+
 /* Sección Hero */
 .hero {
     position: relative;
@@ -348,15 +364,26 @@ h2 {
 
 /* Media Queries y ajustes responsivos específicos */
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Muestra el botón hamburguesa en dispositivos móviles */
+    }
+
     .barra-nav {
+        position: relative;
+    }
+
+    .menu {
+        display: none; /* Oculto por defecto en pantallas estrechas */
+        width: 100%;
         flex-direction: column;
         align-items: center;
-        text-align: center;
+        gap: 1rem;
+        padding-top: 1rem;
+    }
 
-        .menu {
-            justify-content: center;
-            gap: 1rem;
-        }
+    /* Clase activada por JavaScript para desplegar el menú */
+    .menu.is-active {
+        display: flex;
     }
 
     .hero {
